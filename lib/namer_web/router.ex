@@ -13,14 +13,17 @@ defmodule NamerWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", NamerWeb do
+  scope "/namer", NamerWeb do
     pipe_through :browser
 
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", NamerWeb do
-  #   pipe_through :api
-  # end
+  scope "/namer/auth", NamerWeb do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+    post "/:provider/callback", AuthController, :callback
+  end
 end
