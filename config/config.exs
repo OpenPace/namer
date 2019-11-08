@@ -28,7 +28,7 @@ config :phoenix, :json_library, Jason
 config :strava,
   client_id: System.get_env("STRAVA_CLIENT_ID"),
   client_secret: System.get_env("STRAVA_CLIENT_SECRET"),
-  redirect_uri: "http://localhost:4000/integration/strava/callback",
+  redirect_uri: "http://localhost:4000/namer/auth/strava/callback",
   webhook_challenge: System.get_env("STRAVA_WEBHOOK_TOKEN")
 
 # Import environment specific config. This must remain at the bottom
