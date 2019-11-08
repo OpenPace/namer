@@ -8,6 +8,13 @@ defmodule Namer.Accounts do
 
   alias Namer.Accounts.User
 
+  def get_user_by_uid(uid) do
+    query = from u in User,
+      where: u.strava_uid == ^uid
+    query
+    |> Repo.one()
+  end
+
   @doc """
   Returns the list of users.
 
