@@ -1,5 +1,7 @@
 # Activity Namer
 
+[![Build Status](https://travis-ci.org/edance/namer.svg?branch=master)](https://travis-ci.org/edance/namer)
+
 To start your Phoenix server:
 
   * Copy `.env.example` file to `.env` with `cp .env.example .env`

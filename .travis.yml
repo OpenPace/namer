@@ -1,0 +1,18 @@
+language: elixir
+elixir:
+- 1.7
+otp_release:
+- 21.0
+services:
+  - postgresql
+addons:
+  postgresql: "9.4"
+before_script:
+- mix deps.get
+env:
+- MIX_ENV=test
+script:
+- mix credo --strict
+- mix test
+notifications:
+  email: false
