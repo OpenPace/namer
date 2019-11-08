@@ -1,4 +1,8 @@
 defmodule Namer.Accounts.User do
+  @moduledoc """
+  This module is the schema for the user and strava authentication.
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 
