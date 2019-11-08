@@ -14,6 +14,9 @@ defmodule Namer.DataCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL.Sandbox
+  alias Ecto.Changeset
+
   using do
     quote do
       alias Namer.Repo
@@ -26,10 +29,10 @@ defmodule Namer.DataCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Namer.Repo)
+    :ok = Sandbox.checkout(Namer.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Namer.Repo, {:shared, self()})
+      Sandbox.mode(Namer.Repo, {:shared, self()})
     end
 
     :ok
@@ -44,7 +47,7 @@ defmodule Namer.DataCase do
 
   """
   def errors_on(changeset) do
-    Ecto.Changeset.traverse_errors(changeset, fn {message, opts} ->
+    Changeset.traverse_errors(changeset, fn {message, opts} ->
       Regex.replace(~r"%{(\w+)}", message, fn _, key ->
         opts |> Keyword.get(String.to_existing_atom(key), key) |> to_string()
       end)
