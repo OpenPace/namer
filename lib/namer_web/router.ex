@@ -17,6 +17,7 @@ defmodule NamerWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/profile", ProfileController, :index
   end
 
   scope "/namer/auth", NamerWeb do
