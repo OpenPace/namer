@@ -1,12 +1,18 @@
 defmodule NamerWeb.Router do
   use NamerWeb, :router
 
+  alias NamerWeb.Plug
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+  end
+
+  pipeline :authenicated do
+    plug Plug.Auth
   end
 
   pipeline :api do
@@ -17,6 +23,12 @@ defmodule NamerWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+  end
+
+  scope "/namer", NamerWeb do
+    pipe_through :browser
+    pipe_through :authenicated
+
     get "/profile", ProfileController, :index
   end
 

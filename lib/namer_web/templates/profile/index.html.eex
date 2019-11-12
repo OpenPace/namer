@@ -1,1 +1,3 @@
 Profile Page
+
+<%= @current_user.id %>
