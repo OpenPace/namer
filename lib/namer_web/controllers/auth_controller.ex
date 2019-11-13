@@ -12,8 +12,8 @@ defmodule NamerWeb.AuthController do
     user_params = user_attrs(client)
 
     case Accounts.get_user_by_uid(user_params[:strava_uid]) do
-      {:ok, user} -> sign_in_and_redirect(conn, user)
-      _ -> create_user_and_redirect(conn, user_params)
+      nil -> create_user_and_redirect(conn, user_params)
+      user -> sign_in_and_redirect(conn, user)
     end
   end
 
@@ -40,7 +40,7 @@ defmodule NamerWeb.AuthController do
   defp sign_in_and_redirect(conn, user) do
     conn
     |> put_session(:user_id, user.id)
-    |> redirect(to: Routes.page_path(conn, :index))
+    |> redirect(to: Routes.profile_path(conn, :index))
   end
 
   defp create_user_and_redirect(conn, user_params) do
