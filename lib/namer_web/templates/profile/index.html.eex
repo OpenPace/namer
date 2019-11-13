@@ -1,3 +1,5 @@
 Profile Page
 
 <%= @current_user.id %>
+
+<%= render "form.html", assigns %>

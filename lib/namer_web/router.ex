@@ -30,6 +30,7 @@ defmodule NamerWeb.Router do
     pipe_through :authenicated
 
     get "/profile", ProfileController, :index
+    put "/profile", ProfileController, :update
   end
 
   scope "/namer/auth", NamerWeb do
