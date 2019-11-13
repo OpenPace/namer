@@ -9,24 +9,26 @@ defmodule Namer.Accounts do
   alias Namer.Accounts.{User, UserPrefs}
   alias Namer.Repo
 
+  @doc """
+  Gets a single user by the strava user id.
+
+  Returns nil if the User does not exist.
+
+  ## Examples
+
+  iex> get_user!(123)
+  %User{}
+
+  iex> get_user!(456)
+  nil
+
+  """
   def get_user_by_uid(uid) do
     query = from u in User,
       where: u.strava_uid == ^uid
     query
     |> Repo.one()
-  end
-
-  @doc """
-  Returns the list of users.
-
-  ## Examples
-
-      iex> list_users()
-      [%User{}, ...]
-
-  """
-  def list_users do
-    Repo.all(User)
+    |> Repo.preload([:user_prefs])
   end
 
   @doc """
@@ -43,7 +45,11 @@ defmodule Namer.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id)
+  def get_user!(id) do
+    User
+    |> Repo.get!(id)
+    |> Repo.preload([:user_prefs])
+  end
 
   @doc """
   Creates a user.
@@ -58,6 +64,8 @@ defmodule Namer.Accounts do
 
   """
   def create_user(attrs \\ %{user_prefs: %{}}) do
+    attrs = Map.put_new(attrs, :user_prefs, %{})
+
     %User{}
     |> User.changeset(attrs)
     |> Changeset.cast_assoc(:user_prefs, with: &UserPrefs.changeset/2)
@@ -79,23 +87,8 @@ defmodule Namer.Accounts do
   def update_user(%User{} = user, attrs) do
     user
     |> User.changeset(attrs)
+    |> Changeset.cast_assoc(:user_prefs, with: &UserPrefs.changeset/2)
     |> Repo.update()
-  end
-
-  @doc """
-  Deletes a User.
-
-  ## Examples
-
-      iex> delete_user(user)
-      {:ok, %User{}}
-
-      iex> delete_user(user)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_user(%User{} = user) do
-    Repo.delete(user)
   end
 
   @doc """

@@ -6,6 +6,8 @@ defmodule Namer.Repo.Migrations.CreateUserPrefs do
       add :emoji, :boolean, default: true, null: false
       add :branding, :boolean, default: true, null: false
 
+      add :user_id, references(:users, on_delete: :delete_all), null: false
+
       timestamps()
     end
 
