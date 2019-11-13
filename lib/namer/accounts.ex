@@ -4,9 +4,10 @@ defmodule Namer.Accounts do
   """
 
   import Ecto.Query, warn: false
-  alias Namer.Repo
 
-  alias Namer.Accounts.User
+  alias Ecto.Changeset
+  alias Namer.Accounts.{User, UserPrefs}
+  alias Namer.Repo
 
   def get_user_by_uid(uid) do
     query = from u in User,
@@ -56,9 +57,10 @@ defmodule Namer.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_user(attrs \\ %{}) do
+  def create_user(attrs \\ %{user_prefs: %{}}) do
     %User{}
     |> User.changeset(attrs)
+    |> Changeset.cast_assoc(:user_prefs, with: &UserPrefs.changeset/2)
     |> Repo.insert()
   end
 
