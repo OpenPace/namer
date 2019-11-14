@@ -40,4 +40,9 @@ defmodule NamerWeb.Router do
     get "/:provider/callback", AuthController, :callback
     post "/:provider/callback", AuthController, :callback
   end
+
+  scope "/namer", NamerWeb do
+    get "/webhook", WebhookController, :challenge
+    post "/webhook", WebhookController, :webhook
+  end
 end
