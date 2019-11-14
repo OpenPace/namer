@@ -44,6 +44,7 @@ defmodule Namer.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:strava, "~> 1.0"},
+      {:httpoison, "~> 1.5"},
       {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false}
     ]
   end
