@@ -1,6 +1,7 @@
 defmodule Namer.ActivityRenamer do
 
   alias Namer.Accounts
+  alias Namer.NameGenerator
   alias Strava.{Activities, Client}
 
   def rename(user, activity_id) do
@@ -21,8 +22,13 @@ defmodule Namer.ActivityRenamer do
   end
 
   def update_activity(user, activity) do
+    attrs = %{
+      name: NameGenerator.generate_name(user, activity),
+      description: NameGenerator.generate_description(user, activity)
+    }
+
     user
     |> strava_client()
-    |> Activities.update_activity_by_id(activity.id)
+    |> Client.put("/activities/#{activity.id}", attrs)
   end
 end
