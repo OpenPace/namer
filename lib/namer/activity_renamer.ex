@@ -1,4 +1,7 @@
 defmodule Namer.ActivityRenamer do
+  @moduledoc """
+  This module renames activities
+  """
 
   alias Namer.Accounts
   alias Namer.NameGenerator

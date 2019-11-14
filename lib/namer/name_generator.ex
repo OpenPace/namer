@@ -1,4 +1,8 @@
 defmodule Namer.NameGenerator do
+  @moduledoc """
+  This module creates names for a user and activity.
+  """
+
   @emoji_map %{
     "AlpineSki" => "⛷️", # https://emojipedia.org/skier/
     "BackcountrySki" => "⛷", # https://emojipedia.org/skier/
