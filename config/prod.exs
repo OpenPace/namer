@@ -21,7 +21,7 @@ config :logger, level: :info
 config :strava,
   client_id: System.get_env("STRAVA_CLIENT_ID"),
   client_secret: System.get_env("STRAVA_CLIENT_SECRET"),
-  redirect_uri: "#{System.get_env("HOST_URL")}/namer/auth/strava/callback",
+  redirect_uri: "https://www.openpace.co/namer/auth/strava/callback",
   webhook_challenge: System.get_env("STRAVA_WEBHOOK_TOKEN")
 
 # ## SSL Support
