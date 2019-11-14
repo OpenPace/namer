@@ -5,23 +5,24 @@ defmodule Namer.ActivityRenamer do
   alias Strava.{Activities, Client}
 
   def rename(user, activity_id) do
-    {:ok, _activity} = fetch_activity(user, activity_id)
+    {:ok, activity} = fetch_activity(user, activity_id)
+    update_activity(user, activity)
   end
 
-  def fetch_activity(user, activity_id) do
+  defp fetch_activity(user, activity_id) do
     user
     |> strava_client()
     |> Activities.get_activity_by_id(activity_id)
   end
 
-  def strava_client(user) do
+  defp strava_client(user) do
     Client.new(user.access_token,
       refresh_token: user.refresh_token,
       token_refreshed: &Accounts.update_user(user, Map.from_struct(&1.token))
     )
   end
 
-  def update_activity(user, activity) do
+  defp update_activity(user, activity) do
     attrs = %{
       name: NameGenerator.generate_name(user, activity),
       description: NameGenerator.generate_description(user, activity)
