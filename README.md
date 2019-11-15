@@ -1,6 +1,7 @@
 # Activity Namer
 
 [![Build Status](https://travis-ci.org/edance/namer.svg?branch=master)](https://travis-ci.org/edance/namer)
+[![Coverage Status](https://coveralls.io/repos/github/edance/namer/badge.svg?branch=master)](https://coveralls.io/github/edance/namer?branch=master)
 
 To start your Phoenix server:
 
