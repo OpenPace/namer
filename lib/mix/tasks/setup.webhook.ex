@@ -24,7 +24,7 @@ defmodule Mix.Tasks.Setup.Webhooks do
     form = [
       client_id: Application.get_env(:strava, :client_id),
       client_secret: Application.get_env(:strava, :client_secret),
-      callback_url: "https://openpace.co/namer/webhook",
+      callback_url: Application.get_env(:strava, :webhook_uri),
       verify_token: Application.get_env(:strava, :webhook_challenge)
     ]
 
