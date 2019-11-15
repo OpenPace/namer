@@ -23,6 +23,7 @@ defmodule Namer.Accounts do
   nil
 
   """
+  def get_user_by_uid(uid) when is_integer(uid), do: get_user_by_uid("#{uid}")
   def get_user_by_uid(uid) do
     query = from u in User,
       where: u.strava_uid == ^uid
