@@ -19,6 +19,11 @@
     <%= label(p, :branding) %>
 
     <br/>
+
+    <%= label(p, :imperial, "Units & Measurements", class: "form-control-label") %>
+    <%= select p, :imperial, ["Meters & Kilometers": false, "Feet & Miles": true], class: "form-control form-control-alternative" %>
+
+    <br/>
   <% end %>
 
   <button class="btn btn-primary" type="submit">Save</button>
