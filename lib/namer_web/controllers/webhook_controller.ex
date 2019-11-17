@@ -16,6 +16,7 @@ defmodule NamerWeb.WebhookController do
     user = Accounts.get_user_by_uid(params["owner_id"])
 
     Task.start(fn ->
+      :timer.sleep(:timer.minutes(2))
       ActivityRenamer.rename(user, params["object_id"])
     end)
     render(conn, "success.json")
