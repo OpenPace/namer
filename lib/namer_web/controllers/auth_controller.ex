@@ -9,11 +9,11 @@ defmodule NamerWeb.AuthController do
 
   def callback(conn, %{"code" => code}) do
     client = get_token!(code)
-    user_params = user_attrs(client)
+    athlete = Strava.Auth.get_athlete!(client)
 
-    case Accounts.get_user_by_uid(user_params[:strava_uid]) do
-      nil -> create_user_and_redirect(conn, user_params)
-      user -> sign_in_and_redirect(conn, user)
+    case Accounts.get_user_by_uid(athlete.id) do
+      nil -> create_user_and_redirect(conn, client, athlete)
+      user -> sign_in_and_redirect(conn, client, user)
     end
   end
 
@@ -26,26 +26,46 @@ defmodule NamerWeb.AuthController do
     Strava.Auth.get_token!(code: code, grant_type: "authorization_code")
   end
 
-  defp user_attrs(%{token: token} = client) do
-    user = Strava.Auth.get_athlete!(client)
+  defp token_attrs(%{token: token}) do
     %{
-      avatar: user.profile,
       access_token: token.access_token,
-      name: "#{user.firstname} #{user.lastname}",
-      refresh_token: token.refresh_token,
-      strava_uid: "#{user.id}"
+      refresh_token: token.refresh_token
     }
   end
 
-  defp sign_in_and_redirect(conn, user) do
-    conn
-    |> put_session(:user_id, user.id)
-    |> redirect(to: Routes.profile_path(conn, :index))
+  defp user_attrs(client, athlete) do
+    attrs = %{
+      avatar: athlete.profile,
+      name: "#{athlete.firstname} #{athlete.lastname}",
+      strava_uid: "#{athlete.id}",
+      user_prefs: %{
+        imperial: athlete.country == "United States"
+      }
+    }
+    attrs |> Map.merge(token_attrs(client))
   end
 
-  defp create_user_and_redirect(conn, user_params) do
+  defp sign_in_and_redirect(conn, client, user) do
+    case Accounts.update_user(user, token_attrs(client)) do
+      {:ok, _} ->
+        conn
+        |> put_session(:user_id, user.id)
+        |> redirect(to: Routes.profile_path(conn, :index))
+      _ ->
+        conn
+        |> put_flash(:error, "Authentication failed")
+        |> redirect(to: Routes.page_path(conn, :index))
+    end
+  end
+
+  defp create_user_and_redirect(conn, client, athlete) do
+    user_params = user_attrs(client, athlete)
+
     case Accounts.create_user(user_params) do
-      {:ok, user} -> sign_in_and_redirect(conn, user)
+      {:ok, user} ->
+        conn
+        |> put_session(:user_id, user.id)
+        |> redirect(to: Routes.profile_path(conn, :index))
       _ ->
         conn
         |> put_flash(:error, "Authentication failed")
