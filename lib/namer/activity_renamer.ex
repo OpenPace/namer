@@ -27,8 +27,12 @@ defmodule Namer.ActivityRenamer do
 
   defp update_activity(user, activity) do
     attrs = %{
+      commute: activity.commute,
+      description: NameGenerator.generate_description(user, activity),
+      gear_id: activity.gear_id,
       name: NameGenerator.generate_name(user, activity),
-      description: NameGenerator.generate_description(user, activity)
+      trainer: activity.trainer,
+      type: activity.type
     }
 
     user
