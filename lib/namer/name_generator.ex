@@ -83,7 +83,7 @@ defmodule Namer.NameGenerator do
     hours = trunc(t / (60 * 60))
 
     if hours > 0 do
-      "#{hours}hr #{pad_num(minutes)}min"
+      "#{hours}h #{pad_num(minutes)}m"
     else
       "#{minutes}min"
     end
