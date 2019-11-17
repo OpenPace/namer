@@ -12,11 +12,13 @@ defmodule Namer.Accounts.UserPrefs do
   @optional_fields ~w(
     emoji
     branding
+    imperial
   )a
 
   schema "user_prefs" do
     field :emoji, :boolean
     field :branding, :boolean
+    field :imperial, :boolean
 
     belongs_to :user, User
 
