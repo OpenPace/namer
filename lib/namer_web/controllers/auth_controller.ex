@@ -17,6 +17,13 @@ defmodule NamerWeb.AuthController do
     end
   end
 
+  def delete(conn, _params) do
+    conn
+    |> clear_session()
+    |> put_flash(:info, "You have been logged out!")
+    |> redirect(to: Routes.page_path(conn, :index))
+  end
+
   defp authorize_url!() do
     scope = "read,activity:read_all,activity:write"
     Strava.Auth.authorize_url!(scope: scope)

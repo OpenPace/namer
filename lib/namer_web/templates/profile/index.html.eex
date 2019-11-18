@@ -1,5 +1,5 @@
 Profile Page
 
-<%= @current_user.id %>
+<%= link "Log Out", to: Routes.auth_path(@conn, :delete), method: :delete %>
 
 <%= render "form.html", assigns %>
