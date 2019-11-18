@@ -39,6 +39,7 @@ defmodule NamerWeb.Router do
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
     post "/:provider/callback", AuthController, :callback
+    delete "/", AuthController, :delete
   end
 
   scope "/namer", NamerWeb do
