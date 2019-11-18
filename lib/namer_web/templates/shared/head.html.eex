@@ -1,0 +1,10 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="description" content="">
+<meta name="author" content="">
+
+<link href="<%= Routes.static_path(@conn, "/images/favicon.png") %>" rel="shortcut icon" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
+
+<%= render("_gtm.html", assigns) %>
