@@ -8,8 +8,10 @@ defmodule Namer.ActivityRenamer do
   alias Strava.{Activities, Client}
 
   def rename(user, activity_id) do
-    {:ok, activity} = fetch_activity(user, activity_id)
-    update_activity(user, activity)
+    case fetch_activity(user, activity_id) do
+      {:ok, activity} -> update_activity(user, activity)
+      error -> error
+    end
   end
 
   defp fetch_activity(user, activity_id) do
