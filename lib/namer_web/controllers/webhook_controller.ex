@@ -7,10 +7,12 @@ defmodule NamerWeb.WebhookController do
 
   alias Namer.Accounts
   alias Namer.ActivityRenamer
+  alias Namer.Logger
 
   @challenge_token Application.get_env(:strava, :webhook_challenge)
 
   plug :validate_token when action in [:challenge]
+  plug :log_event
 
   def webhook(conn, %{"aspect_type" => "create", "object_type" => "activity"} = params) do
     user = Accounts.get_user_by_uid(params["owner_id"])
@@ -42,5 +44,11 @@ defmodule NamerWeb.WebhookController do
     conn
     |> put_status(:bad_request)
     |> render("400.json")
+  end
+
+  defp log_event(conn, _)  do
+    body = Jason.encode!(conn.params)
+    Logger.log_webhook_event(%{provider: "strava", body: body})
+    conn
   end
 end
