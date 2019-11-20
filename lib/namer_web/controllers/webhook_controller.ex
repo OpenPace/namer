@@ -15,7 +15,7 @@ defmodule NamerWeb.WebhookController do
   plug :log_event
 
   def webhook(conn, %{"aspect_type" => "create", "object_type" => "activity"} = params) do
-    Task.start(fn -> process_event(params) end)
+    process_event(params)
     render(conn, "success.json")
   end
   def webhook(conn, _), do: render(conn, "success.json")
@@ -42,7 +42,6 @@ defmodule NamerWeb.WebhookController do
   end
 
   defp process_event(params) do
-    :timer.sleep(:timer.minutes(1))
     user = Accounts.get_user_by_uid(params["owner_id"])
     ActivityRenamer.rename(user, params["object_id"])
   end
