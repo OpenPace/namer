@@ -5,12 +5,27 @@ defmodule Namer.ActivityRenamer do
 
   alias Namer.Accounts
   alias Namer.NameGenerator
-  alias Strava.{Activities, Client}
+  alias Strava.{Activities, Client, DetailedActivity}
 
-  def rename(user, activity_id) do
+  import Strava.RequestBuilder
+
+  def rename(user, activity_id) when is_binary(activity_id) or is_integer(activity_id) do
     case fetch_activity(user, activity_id) do
-      {:ok, activity} -> update_activity(user, activity)
+      {:ok, activity} -> rename(user, activity)
       error -> error
+    end
+  end
+
+  def rename(user, activity) do
+    name = NameGenerator.generate_name(user, activity)
+    description = NameGenerator.generate_description(user, activity)
+    attrs = %{name: name, description: description}
+
+    with {:ok, activity} <- update_activity(user, activity, attrs),
+         {:ok, activity} <- confirm_name(activity.name, activity) do
+      {:ok, activity}
+    else
+      _ -> {:error}
     end
   end
 
@@ -27,18 +42,18 @@ defmodule Namer.ActivityRenamer do
     )
   end
 
-  defp update_activity(user, activity) do
-    attrs = %{
-      commute: activity.commute,
-      description: NameGenerator.generate_description(user, activity),
-      gear_id: activity.gear_id,
-      name: NameGenerator.generate_name(user, activity),
-      trainer: activity.trainer,
-      type: activity.type
-    }
-
+  defp update_activity(user, activity, attrs) do
     user
     |> strava_client()
     |> Client.put("/activities/#{activity.id}", attrs)
+    |> decode(%DetailedActivity{})
+  end
+
+  defp confirm_name(name, activity) do
+    if name == activity.name do
+      {:ok, activity}
+    else
+      {:error}
+    end
   end
 end

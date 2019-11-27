@@ -6,8 +6,8 @@ defmodule NamerWeb.WebhookController do
   """
 
   alias Namer.Accounts
-  alias Namer.ActivityRenamer
   alias Namer.Logger
+  alias Namer.RenamerJob
 
   @challenge_token Application.get_env(:strava, :webhook_challenge)
 
@@ -15,7 +15,7 @@ defmodule NamerWeb.WebhookController do
   plug :log_event
 
   def webhook(conn, %{"aspect_type" => "create", "object_type" => "activity"} = params) do
-    process_event(params)
+    Task.start(fn -> process_event(params) end)
     render(conn, "success.json")
   end
   def webhook(conn, _), do: render(conn, "success.json")
@@ -43,7 +43,7 @@ defmodule NamerWeb.WebhookController do
 
   defp process_event(params) do
     user = Accounts.get_user_by_uid(params["owner_id"])
-    ActivityRenamer.rename(user, params["object_id"])
+    RenamerJob.perform(user, params["object_id"])
   end
 
   defp log_event(conn, _)  do
