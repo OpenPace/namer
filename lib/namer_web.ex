@@ -19,7 +19,7 @@ defmodule NamerWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: NamerWeb
+      use Phoenix.Controller, namespace: NamerWeb, log: :info
 
       import Plug.Conn
       import NamerWeb.Gettext

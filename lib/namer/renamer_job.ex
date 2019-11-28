@@ -2,12 +2,15 @@ defmodule Namer.RenamerJob do
   @moduledoc """
   Basic job to retry naming 3 times.
   """
+  require Logger
 
   alias Namer.ActivityRenamer
 
   def perform(user, activity_id, retry \\ 3)
   def perform(_, _, 0), do: :ignore
   def perform(user, activity_id, retry) do
+    Logger.info("Starting job for #{user.id} for activity #{activity_id}")
+
     case ActivityRenamer.rename(user, activity_id) do
       {:error} ->
         :timer.sleep(:timer.minutes(1))
