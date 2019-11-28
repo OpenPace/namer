@@ -2,6 +2,7 @@ defmodule Namer.ActivityRenamer do
   @moduledoc """
   This module renames activities
   """
+  require Logger
 
   alias Namer.Accounts
   alias Namer.NameGenerator
@@ -21,8 +22,12 @@ defmodule Namer.ActivityRenamer do
     description = NameGenerator.generate_description(user, activity)
     attrs = %{name: name, description: description}
 
+    Logger.info("Renaming #{activity.id}: #{name}")
+
     with {:ok, activity} <- update_activity(user, activity, attrs),
          {:ok, activity} <- confirm_name(activity.name, activity) do
+
+      Logger.info("Renamed #{activity.id}: #{name}")
       {:ok, activity}
     else
       _ -> {:error}
