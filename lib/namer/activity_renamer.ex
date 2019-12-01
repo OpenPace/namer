@@ -25,7 +25,7 @@ defmodule Namer.ActivityRenamer do
     Logger.info("Renaming #{activity.id}: #{name}")
 
     with {:ok, activity} <- update_activity(user, activity, attrs),
-         {:ok, activity} <- confirm_name(activity.name, activity) do
+         {:ok, activity} <- confirm_name(user, name, activity) do
 
       Logger.info("Renamed #{activity.id}: #{name}")
       {:ok, activity}
@@ -54,11 +54,16 @@ defmodule Namer.ActivityRenamer do
     |> decode(%DetailedActivity{})
   end
 
-  defp confirm_name(name, activity) do
-    if name == activity.name do
-      {:ok, activity}
-    else
-      {:error}
+  defp confirm_name(user, name, %{id: id}) do
+    case fetch_activity(user, id) do
+      {:ok, activity} ->
+        if name == activity.name do
+          {:ok, activity}
+        else
+          Logger.info("Activity #{activity.id} #{activity.name} != #{name}")
+          {:error}
+        end
+      _ -> {:error}
     end
   end
 end
