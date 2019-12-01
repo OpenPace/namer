@@ -19,21 +19,21 @@ defmodule NamerWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/namer", NamerWeb do
+  scope "/", NamerWeb do
     pipe_through :browser
 
     get "/", PageController, :index
   end
 
-  scope "/namer", NamerWeb do
+  scope "/profile", NamerWeb do
     pipe_through :browser
     pipe_through :authenicated
 
-    get "/profile", ProfileController, :index
-    put "/profile", ProfileController, :update
+    get "/", ProfileController, :index
+    put "/", ProfileController, :update
   end
 
-  scope "/namer/auth", NamerWeb do
+  scope "/auth", NamerWeb do
     pipe_through :browser
 
     get "/:provider", AuthController, :request
@@ -42,8 +42,8 @@ defmodule NamerWeb.Router do
     delete "/", AuthController, :delete
   end
 
-  scope "/namer", NamerWeb do
-    get "/webhook", WebhookController, :challenge
-    post "/webhook", WebhookController, :webhook
+  scope "/webhook", NamerWeb do
+    get "/", WebhookController, :challenge
+    post "/", WebhookController, :webhook
   end
 end
