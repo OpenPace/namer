@@ -1,5 +1,118 @@
-Profile Page
+<div class="main-content">
+  <!-- Navbar -->
+  <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+    <div class="container">
+      <!-- Brand -->
+      <span class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">Profile</span>
 
-<%= link "Log Out", to: Routes.auth_path(@conn, :delete), method: :delete %>
+      <!-- User -->
+      <ul class="navbar-nav align-items-center d-none d-md-flex">
+        <li class="nav-item dropdown">
+          <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="media align-items-center">
+              <span class="avatar avatar-sm rounded-circle">
+                <%= if @current_user.avatar do %>
+                  <img src="<%= @current_user.avatar %>"/>
+                <% else %>
+                  <span class="iconify" data-icon="whh:profile" data-inline="false"></span>
+                <% end %>
+              </span>
 
-<%= render "form.html", assigns %>
+              <div class="media-body ml-2 d-none d-lg-block">
+                <span class="mb-0 text-sm  font-weight-bold"><%= @current_user.name %></span>
+              </div>
+            </div>
+          </a>
+          <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+            <div class=" dropdown-header noti-title">
+              <h6 class="text-overflow m-0">Welcome!</h6>
+            </div>
+
+            <%= link(to: Routes.profile_path(@conn, :index), class: "dropdown-item") do %>
+              <span class="iconify" data-icon="fa-regular:user-circle" data-inline="false"></span>
+              <span><%= gettext("Profile") %></span>
+            <% end %>
+
+            <div class="dropdown-divider"></div>
+
+            <%= link class: "dropdown-item", to: Routes.auth_path(@conn, :delete), method: :delete do %>
+              <span class="iconify" data-icon="websymbol:logout" data-inline="false"></span>
+              <span><%= gettext("Logout") %></span>
+            <% end %>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+
+  <!-- Header -->
+  <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center">
+    <!-- Mask -->
+    <span class="mask bg-gradient-default opacity-8"></span>
+    <!-- Header container -->
+    <div class="container d-flex align-items-center">
+      <div class="row">
+        <div class="col-md-10">
+          <h1 class="display-2 text-white">Hello <%= @current_user.name %></h1>
+
+          <p class="text-white mt-0 mb-5">
+            <%= gettext("This is your profile page. You can update your preferences and manage your account here.") %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page content -->
+  <div class="container mt--7 mb-5">
+    <div class="row">
+      <div class="col-xl-8 order-xl-1">
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">My Account</h3>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <%= render "form.html", assigns %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row align-items-center justify-content-xl-between">
+      <div class="col-xl-6">
+        <div class="copyright text-center text-xl-left text-muted">
+          &copy;
+
+          <script>
+           document.write(new Date().getFullYear());
+          </script>
+
+          <a href="https://www.openpace.co" class="ml-1" target="_blank">OpenPace</a>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+          <li class="nav-item">
+            <a href="" class="nav-link" target="_blank">Terms and Conditions</a>
+          </li>
+          <li class="nav-item">
+            <a href="" class="nav-link" target="_blank">Privacy Policy</a>
+          </li>
+          <li class="nav-item">
+            <a href="" class="nav-link" target="_blank">Source Code</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
