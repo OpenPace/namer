@@ -1,0 +1,19 @@
+iframe {
+  border: 0;
+}
+
+figcaption,
+figure,
+main {
+  display: block;
+}
+
+main {
+  background: $white;
+  overflow: hidden;
+  position: relative;
+}
+
+*:focus {
+  outline: none;
+}

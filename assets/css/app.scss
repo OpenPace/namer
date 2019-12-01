@@ -1,11 +1,31 @@
-/* This file is for your main application css. */
+/*!
+
+=========================================================
+* Argon Dashboard - v1.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/argon-dashboard
+* Copyright 2018 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+
 // Core
 
 @import "node_modules/bootstrap/scss/functions";
+@import "custom/functions";
 
+@import "custom/variables";
 @import "node_modules/bootstrap/scss/variables";
 
 @import "node_modules/bootstrap/scss/mixins";
+@import "custom/mixins";
 
 // Bootstrap components
 
@@ -42,3 +62,13 @@
 @import "node_modules/bootstrap/scss/spinners";
 @import "node_modules/bootstrap/scss/utilities";
 @import "node_modules/bootstrap/scss/print";
+
+// Argon utilities and components
+
+@import "custom/reboot";
+@import "custom/utilities";
+@import "custom/components";
+
+// Vendor (Plugins)
+
+@import "custom/vendors";
