@@ -7,6 +7,8 @@ defmodule Namer.NameGenerator do
   alias Namer.DurationFormatter
   alias Namer.EmojiFormatter
 
+  @branding_text "Renamed with openpace.co/namer"
+
   def generate_name(user, activity) do
     parts = [
       emoji(user, activity),
@@ -27,8 +29,8 @@ defmodule Namer.NameGenerator do
 
   defp description(%{user_prefs: %{branding: true}}, activity) do
     [
-      activity.description,
-      "Renamed with openpace.co/namer"
+      stripped_description(activity.description),
+      @branding_text
     ]
     |> Enum.reject(&is_blank/1)
     |> Enum.join(" - ")
@@ -60,4 +62,8 @@ defmodule Namer.NameGenerator do
   end
 
   defp is_blank(str), do: is_nil(str) || String.trim(str) == ""
+
+  defp stripped_description(description) do
+    String.replace(description, @branding_text, "")
+  end
 end
