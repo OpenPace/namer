@@ -48,9 +48,15 @@ defmodule Namer.ActivityRenamer do
   end
 
   defp update_activity(user, activity, attrs) do
-    user
+    resp = user
     |> strava_client()
     |> Client.put("/activities/#{activity.id}", attrs)
+
+    {:ok, %{body: body, status: status}} = resp
+    Logger.info("Response: #{status}")
+    Logger.info("Body: #{body}")
+
+    resp
     |> decode(%DetailedActivity{})
   end
 
