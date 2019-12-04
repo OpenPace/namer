@@ -16,5 +16,5 @@ defmodule Namer.DistanceFormatter do
   def label([imperial: true]), do: "mi"
   def label([imperial: _]), do: "km"
 
-  defp round_distance(num), do: Float.round(num, 2)
+  defp round_distance(num), do: Float.round(num, 1)
 end
