@@ -10,7 +10,10 @@ defmodule Namer.NameGenerator do
   def generate_name(user, activity) do
     parts = [
       emoji(user, activity),
-      name(user, activity)
+      distance(user, activity),
+      duration(user, activity),
+      relative_time(user, activity),
+      activity.type
     ]
 
     parts
@@ -37,13 +40,23 @@ defmodule Namer.NameGenerator do
   end
   defp emoji(_, _), do: nil
 
-  defp name(_, %{distance: distance} = activity) when distance == 0 do
-    duration = DurationFormatter.format(activity.moving_time)
-    "#{duration} #{activity.type}"
+  defp distance(_, %{distance: distance}) when distance == 0, do: nil
+  defp distance(%{user_prefs: %{imperial: imperial}}, activity) do
+    DistanceFormatter.format(activity.distance, imperial: imperial)
   end
-  defp name(%{user_prefs: %{imperial: imperial}}, activity) do
-    distance = DistanceFormatter.format(activity.distance, imperial: imperial)
-    "#{distance} #{activity.type}"
+
+  defp duration(_, %{distance: distance} = activity) when distance == 0 do
+    DurationFormatter.format(activity.moving_time)
+  end
+  defp duration(_, _), do: nil
+
+  defp relative_time(_, %{start_date_local: timestamp}) do
+    case timestamp.hour do
+      x when x >= 5 and x < 12 -> "Morning" # 5am until 12 noon
+      x when x >= 12 and x < 17 -> "Afternoon" # noon until 5pm
+      x when x > 17 and x < 21 -> "Evening" # 5pm until 9pm
+      _ -> "Night" # After 9pm
+    end
   end
 
   defp is_blank(str), do: is_nil(str) || String.trim(str) == ""
