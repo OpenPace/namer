@@ -24,7 +24,9 @@ defmodule Namer.ActivityRenamer do
 
     Logger.info("Renaming #{activity.id}: #{name}")
 
-    with {:ok, activity} <- update_activity(user, activity, attrs),
+    with :ok <- sleep(),
+         {:ok, activity} <- update_activity(user, activity, attrs),
+         :ok <- sleep(),
          {:ok, activity} <- confirm_name(user, name, activity) do
 
       Logger.info("Renamed #{activity.id}: #{name}")
@@ -58,6 +60,11 @@ defmodule Namer.ActivityRenamer do
 
     resp
     |> decode(%DetailedActivity{})
+  end
+
+  defp sleep do
+    Logger.info("Sleeping for 1 minute")
+    :timer.sleep(:timer.minutes(1))
   end
 
   defp confirm_name(user, name, %{id: id}) do
