@@ -63,6 +63,7 @@ defmodule Namer.NameGenerator do
 
   defp is_blank(str), do: is_nil(str) || String.trim(str) == ""
 
+  defp stripped_description(description) when is_nil(description), do: ""
   defp stripped_description(description) do
     String.replace(description, @branding_text, "")
   end
