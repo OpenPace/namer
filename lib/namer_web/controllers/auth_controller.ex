@@ -20,7 +20,6 @@ defmodule NamerWeb.AuthController do
   def delete(conn, _params) do
     conn
     |> clear_session()
-    |> put_flash(:info, "You have been logged out!")
     |> redirect(to: Routes.page_path(conn, :index))
   end
 
