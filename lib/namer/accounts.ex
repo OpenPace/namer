@@ -8,6 +8,7 @@ defmodule Namer.Accounts do
   alias Ecto.Changeset
   alias Namer.Accounts.{User, UserPrefs}
   alias Namer.Repo
+  alias Strava.Auth
 
   @doc """
   Gets a single user by the strava user id.
@@ -50,6 +51,13 @@ defmodule Namer.Accounts do
     User
     |> Repo.get!(id)
     |> Repo.preload([:user_prefs])
+  end
+
+  def refresh_token(%User{refresh_token: refresh_token} = user) do
+    case Auth.get_token(grant_type: "refresh_token", refresh_token: refresh_token) do
+      {:ok, client} -> update_user(user, Map.from_struct(client.token))
+      _ -> :error
+    end
   end
 
   @doc """

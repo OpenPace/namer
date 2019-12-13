@@ -4,9 +4,8 @@ defmodule NamerWeb.WebhookController do
   @moduledoc """
   Controller to handle the webhooks from Strava
   """
-  require Logger
 
-  alias Namer.Accounts
+  alias Namer.Logger
   alias Namer.RenamerJob
 
   @challenge_token Application.get_env(:strava, :webhook_challenge)
@@ -41,18 +40,14 @@ defmodule NamerWeb.WebhookController do
     |> render("400.json")
   end
 
-  defp process_event(params) do
-    activity_id = params["object_id"]
-    Logger.info("Sleeping 1 minute for activity #{activity_id}")
-    :timer.sleep(:timer.minutes(1))
-    user = Accounts.get_user_by_uid(params["owner_id"])
-    Logger.info("Found user #{user.id} for activity #{activity_id}")
-    RenamerJob.perform(user, activity_id)
+  defp process_event(%{"owner_id" => user_id, "object_id" => activity_id}) do
+    RenamerJob.perform(user_id, activity_id)
   end
+  defp process_event(_), do: nil
 
   defp log_event(conn, _)  do
     body = Jason.encode!(conn.params)
-    Namer.Logger.log_webhook_event(%{provider: "strava", body: body})
+    Logger.log_webhook_event(%{provider: "strava", body: body})
     conn
   end
 end
