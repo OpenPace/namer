@@ -11,8 +11,10 @@ defmodule Namer.ActivityRenamer do
   import Strava.RequestBuilder
 
   def rename(user, activity_id) when is_binary(activity_id) or is_integer(activity_id) do
-    case fetch_activity(user, activity_id) do
-      {:ok, activity} -> rename(user, activity)
+    with {:ok, user} <- Accounts.refresh_token(user),
+         {:ok, activity} <- fetch_activity(user, activity_id) do
+      rename(user, activity)
+    else
       error -> error
     end
   end
@@ -24,9 +26,7 @@ defmodule Namer.ActivityRenamer do
 
     Logger.info("Renaming #{activity.id}: #{name}")
 
-    with :ok <- sleep(),
-         {:ok, activity} <- update_activity(user, activity, attrs),
-         :ok <- sleep(),
+    with {:ok, activity} <- update_activity(user, activity, attrs),
          {:ok, activity} <- confirm_name(user, name, activity) do
 
       Logger.info("Renamed #{activity.id}: #{name}")
@@ -60,11 +60,6 @@ defmodule Namer.ActivityRenamer do
 
     resp
     |> decode(%DetailedActivity{})
-  end
-
-  defp sleep do
-    Logger.info("Sleeping for 1 minute")
-    :timer.sleep(:timer.minutes(1))
   end
 
   defp confirm_name(user, name, %{id: id}) do

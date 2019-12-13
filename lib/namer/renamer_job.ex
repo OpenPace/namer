@@ -4,18 +4,28 @@ defmodule Namer.RenamerJob do
   """
   require Logger
 
+  alias Namer.Accounts
   alias Namer.ActivityRenamer
 
-  def perform(user, activity_id, retry \\ 10)
+  def perform(strava_uid, activity_id, retry \\ 10)
   def perform(_, _, 0), do: :ignore
-  def perform(user, activity_id, retry) do
-    Logger.info("Starting job for #{user.id} for activity #{activity_id}")
+  def perform(strava_uid, activity_id, retry) do
+    Logger.info("Starting job for #{strava_uid} for activity #{activity_id}")
 
-    case ActivityRenamer.rename(user, activity_id) do
-      {:error} ->
+    with {:ok, user} <- get_user(strava_uid),
+         {:ok, _} <- ActivityRenamer.rename(user, activity_id) do
+      :ok
+    else
+      _ ->
         :timer.sleep(:timer.minutes(1))
-        perform(user, activity_id, retry - 1)
-      _ -> :ok
+        perform(strava_uid, activity_id, retry - 1)
+    end
+  end
+
+  defp get_user(strava_uid) do
+    case Accounts.get_user_by_uid(strava_uid) do
+      nil -> :error
+      user -> {:ok, user}
     end
   end
 end
