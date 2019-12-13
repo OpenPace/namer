@@ -1,0 +1,63 @@
+## "msgid"s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove "msgid"s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use "mix gettext.extract --merge" or "mix gettext.merge"
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: es\n"
+"Plural-Forms: nplurals=2\n"
+
+#, elixir-format
+#: lib/namer/name_generator.ex:58
+msgid "Afternoon"
+msgstr ""
+
+#, elixir-format
+#: lib/namer_web/views/page_view.ex:5
+msgid "Emojify your Strava Activities"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/name_generator.ex:59
+msgid "Evening"
+msgstr ""
+
+#, elixir-format
+#: lib/namer_web/templates/profile/index.html.eex:40
+msgid "Logout"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/name_generator.ex:57
+msgid "Morning"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/name_generator.ex:60
+msgid "Night"
+msgstr ""
+
+#, elixir-format
+#: lib/namer_web/templates/profile/index.html.eex:33
+#: lib/namer_web/views/profile_view.ex:5
+msgid "Profile"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/name_generator.ex:72
+msgid "Renamed with openpace.co/namer"
+msgstr ""
+
+#, elixir-format
+#: lib/namer_web/templates/profile/index.html.eex:60
+msgid "This is your profile page. You can update your preferences and manage your account here."
+msgstr ""
+
+#, elixir-format
+#: lib/namer_web/controllers/profile_controller.ex:20
+msgid "Your preferences have been updated"
+msgstr ""

@@ -39,6 +39,31 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
+### Translations
+
+Every time that we add a new call to gettext in the templates, we need to update our POT and PO files. We can accomplish that with a single task:
+
+```bash
+mix gettext.extract --merge
+```
+
+### Pending Translations
+
+To update and add to existing locales, please visit the folders below and update the PO files.
+
+* [French (fr)](https://github.com/edance/squeeze/blob/master/priv/gettext/fr/LC_MESSAGES)
+* [German (de)](https://github.com/edance/squeeze/blob/master/priv/gettext/de/LC_MESSAGES)
+* [Spanish (es)](https://github.com/edance/squeeze/blob/master/priv/gettext/es/LC_MESSAGES)
+* [Russian (ru)](https://github.com/edance/squeeze/blob/master/priv/gettext/ru/LC_MESSAGES)
+
+### New Translations
+
+To add new locales, run this task below to create PO files for that locale:
+
+```bash
+mix gettext.merge priv/gettext --locale it
+```
+
 ### Feedback
 
 Please email us with any ideas, bugs, suggestions at feedback AT openpace.co.
