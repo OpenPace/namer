@@ -11,6 +11,8 @@ defmodule Namer.NameGenerator do
   alias Namer.EmojiFormatter
 
   def generate_name(user, activity) do
+    put_user_locale(user)
+
     parts = [
       emoji(user, activity),
       distance(user, activity),
@@ -25,6 +27,7 @@ defmodule Namer.NameGenerator do
   end
 
   def generate_description(user, activity) do
+    put_user_locale(user)
     description(user, activity)
   end
 
@@ -71,5 +74,9 @@ defmodule Namer.NameGenerator do
 
   defp branding_text() do
     gettext("Renamed with openpace.co/namer")
+  end
+
+  defp put_user_locale(%{user_prefs: %{locale: locale}}) do
+    Gettext.put_locale(NamerWeb.Gettext, locale)
   end
 end

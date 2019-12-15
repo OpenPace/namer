@@ -4,4 +4,10 @@ defmodule NamerWeb.ProfileView do
   def title(_page, _assigns) do
     gettext("Profile")
   end
+
+  def locales do
+    [
+      "English": "en"
+    ]
+  end
 end
