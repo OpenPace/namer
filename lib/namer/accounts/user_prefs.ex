@@ -13,12 +13,14 @@ defmodule Namer.Accounts.UserPrefs do
     emoji
     branding
     imperial
+    locale
   )a
 
   schema "user_prefs" do
     field :emoji, :boolean
     field :branding, :boolean
     field :imperial, :boolean
+    field :locale, :string
 
     belongs_to :user, User
 

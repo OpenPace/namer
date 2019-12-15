@@ -1,0 +1,240 @@
+## "msgid"s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove "msgid"s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use "mix gettext.extract --merge" or "mix gettext.merge"
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: es\n"
+"Plural-Forms: nplurals=2\n"
+
+#, elixir-format
+#: lib/namer/name_generator.ex:61
+msgid "Afternoon"
+msgstr ""
+
+#, elixir-format
+#: lib/namer_web/views/page_view.ex:5
+msgid "Emojify your Strava Activities"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/name_generator.ex:62
+msgid "Evening"
+msgstr ""
+
+#, elixir-format
+#: lib/namer_web/templates/profile/index.html.eex:40
+msgid "Logout"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/name_generator.ex:60
+msgid "Morning"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/name_generator.ex:63
+msgid "Night"
+msgstr ""
+
+#, elixir-format
+#: lib/namer_web/templates/profile/index.html.eex:33
+#: lib/namer_web/views/profile_view.ex:7
+msgid "Profile"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/name_generator.ex:75
+msgid "Renamed with openpace.co/namer"
+msgstr ""
+
+#, elixir-format
+#: lib/namer_web/templates/profile/index.html.eex:60
+msgid "This is your profile page. You can update your preferences and manage your account here."
+msgstr ""
+
+#, elixir-format
+#: lib/namer_web/controllers/profile_controller.ex:20
+msgid "Your preferences have been updated"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:9
+msgid "Backcountry Ski"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:12
+msgid "Bike"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:10
+msgid "Canoeing"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:11
+msgid "Crossfit"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:13
+msgid "Elliptical"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:14
+msgid "Golf"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:15
+msgid "Handcycle"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:16
+msgid "Hike"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:19
+msgid "Kayaking"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:20
+msgid "Kitesurf"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:21
+msgid "Nordic Ski"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:22
+#: lib/namer/activity_type_formatter.ex:37
+msgid "Ride"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:24
+msgid "Roller Ski"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:25
+msgid "Rowing"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:26
+#: lib/namer/activity_type_formatter.ex:38
+msgid "Run"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:33
+msgid "SUP"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:27
+msgid "Sail"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:28
+msgid "Skateboard"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:8
+msgid "Ski"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:29
+msgid "Snowboard"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:30
+msgid "Snowshoe"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:31
+msgid "Soccer"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:32
+msgid "Stair Stepper"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:34
+msgid "Surfing"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:35
+msgid "Swim"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:36
+msgid "Velomobile"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:39
+msgid "Walk"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:40
+msgid "Weight Training"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:41
+msgid "Wheelchair"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:42
+msgid "Windsurf"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:43
+msgid "Workout"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:44
+msgid "Yoga"
+msgstr ""
+
+#, elixir-format
+#: lib/namer/activity_type_formatter.ex:23
+msgid "Rock Climbing"
+msgstr ""
+
+#, elixir-format, fuzzy
+#: lib/namer/activity_type_formatter.ex:17
+msgid "Ice Skate"
+msgstr ""
+
+#, elixir-format, fuzzy
+#: lib/namer/activity_type_formatter.ex:18
+msgid "Inline Skate"
+msgstr ""
