@@ -12,7 +12,11 @@ import '../css/app.scss';
 import 'phoenix_html';
 import 'bootstrap';
 
-// Import local files
-//
-// Local files can be imported directly using relative paths, for example:
-// import socket from './socket'
+// Load fonts async
+import WebFont from 'webfontloader';
+
+WebFont.load({
+  google: {
+    families: ['Open Sans'],
+  },
+});
