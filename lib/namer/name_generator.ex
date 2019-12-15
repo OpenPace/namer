@@ -3,6 +3,7 @@ defmodule Namer.NameGenerator do
   This module creates names for a user and activity.
   """
 
+  alias Namer.ActivityTypeFormatter
   alias Namer.DistanceFormatter
   alias Namer.DurationFormatter
   alias Namer.EmojiFormatter
@@ -15,7 +16,7 @@ defmodule Namer.NameGenerator do
       distance(user, activity),
       duration(user, activity),
       relative_time(user, activity),
-      activity.type
+      ActivityTypeFormatter.format(activity.type)
     ]
 
     parts
