@@ -20,3 +20,8 @@ WebFont.load({
     families: ['Open Sans'],
   },
 });
+
+// Iconify for icons
+import Iconify from '@iconify/iconify';
+Iconify.setConfig('localStorage', true);
+Iconify.scanDOM();

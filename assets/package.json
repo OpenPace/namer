@@ -6,6 +6,7 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
+    "@iconify/iconify": "^1.0.3",
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.0",
     "phoenix": "file:../deps/phoenix",
