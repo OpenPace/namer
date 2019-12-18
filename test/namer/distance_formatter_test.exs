@@ -5,21 +5,25 @@ defmodule Namer.DistanceFormatterTest do
 
   alias Namer.DistanceFormatter
 
-  test "mile_in_meters" do
-    assert DistanceFormatter.mile_in_meters == 1609
-  end
-
   describe "#format/2" do
+    test "with swim and imperial" do
+      assert format(%{type: "Swim", distance: 500}, imperial: true) == "547 yd"
+    end
+
+    test "with swim and metric" do
+      assert format(%{type: "Swim", distance: 500}, imperial: false) == "500 m"
+    end
+
     test "with imperial: true returns miles" do
-      assert DistanceFormatter.format(10_000, imperial: true) == "6.2 mi"
+      assert format(%{distance: 10_000}, imperial: true) == "6.2 mi"
     end
 
     test "with imperial: false returns km" do
-      assert DistanceFormatter.format(10_000, imperial: false) == "10.0 km"
+      assert format(%{distance: 10_000}, imperial: false) == "10.0 km"
     end
   end
 
-  test "#format/1 returns km" do
-    assert DistanceFormatter.format(10_000) == "10.0 km"
+  defp format(activity, opts) do
+    DistanceFormatter.format(activity, opts)
   end
 end
