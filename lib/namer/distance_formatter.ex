@@ -4,17 +4,28 @@ defmodule Namer.DistanceFormatter do
   """
 
   @mile_in_meters 1_609 # 1 mile == 1609 meters
+  @yard_in_meters 0.9144
 
-  def mile_in_meters, do: @mile_in_meters
+  def format(%{type: "Swim", distance: distance}, opts) do
+    to_yards_or_meters(distance, opts)
+  end
+  def format(%{distance: distance}, opts) do
+    to_miles_or_kilometers(distance, opts)
+  end
 
-  def to_float(distance, [imperial: true]), do: round_distance(distance / mile_in_meters())
-  def to_float(distance, [imperial: _]), do: round_distance(distance / 1_000)
+  def to_yards_or_meters(distance, [imperial: false]) do
+    "#{distance} m"
+  end
+  def to_yards_or_meters(distance, [imperial: _]) do
+    "#{round(distance / @yard_in_meters)} yd"
+  end
 
-  def format(distance, opts), do: "#{to_float(distance, opts)} #{label(opts)}"
-  def format(distance), do: format(distance, imperial: false)
-
-  def label([imperial: true]), do: "mi"
-  def label([imperial: _]), do: "km"
+  defp to_miles_or_kilometers(distance, [imperial: true]) do
+    "#{round_distance(distance / @mile_in_meters)} mi"
+  end
+  defp to_miles_or_kilometers(distance, [imperial: _]) do
+    "#{round_distance(distance / 1_000)} km"
+  end
 
   defp round_distance(num), do: Float.round(num, 1)
 end
