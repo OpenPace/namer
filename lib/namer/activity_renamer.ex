@@ -5,6 +5,7 @@ defmodule Namer.ActivityRenamer do
   require Logger
 
   alias Namer.Accounts
+  alias Namer.DescriptionGenerator
   alias Namer.NameGenerator
   alias Strava.{Activities, Client, DetailedActivity}
 
@@ -21,7 +22,7 @@ defmodule Namer.ActivityRenamer do
 
   def rename(user, activity) do
     name = NameGenerator.generate_name(user, activity)
-    description = NameGenerator.generate_description(user, activity)
+    description = DescriptionGenerator.generate_description(user, activity)
     attrs = %{name: name, description: description}
 
     Logger.info("Renaming #{activity.id}: #{name}")
