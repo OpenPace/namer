@@ -16,7 +16,7 @@ defmodule Namer.NameGenerator do
     parts = [
       emoji(user, activity),
       DistanceFormatter.format(activity, imperial: imperial),
-      duration(user, activity),
+      DurationFormatter.format(activity),
       relative_time(user, activity),
       ActivityTypeFormatter.format(activity.type)
     ]
@@ -44,11 +44,6 @@ defmodule Namer.NameGenerator do
     EmojiFormatter.format(activity.type)
   end
   defp emoji(_, _), do: nil
-
-  defp duration(_, %{distance: distance} = activity) when distance == 0 do
-    DurationFormatter.format(activity.moving_time)
-  end
-  defp duration(_, _), do: nil
 
   defp relative_time(_, %{start_date_local: timestamp}) do
     case timestamp.hour do
