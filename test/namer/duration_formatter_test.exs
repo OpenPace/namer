@@ -6,6 +6,10 @@ defmodule Namer.DurationFormatterTest do
   alias Namer.DurationFormatter
 
   describe "#format/1" do
+    test "with a distance greater than zero" do
+      assert DurationFormatter.format(%{distance: 100, moving_time: 100}) == nil
+    end
+
     test "over 1 hr with double digit minutes" do
       assert format(74) == "1h 14m"
     end
@@ -25,6 +29,6 @@ defmodule Namer.DurationFormatterTest do
 
   defp format(min) do
     t = min * 60
-    DurationFormatter.format(t)
+    DurationFormatter.format(%{distance: 0, moving_time: t})
   end
 end

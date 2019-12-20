@@ -3,7 +3,8 @@ defmodule Namer.DurationFormatter do
   This module formats the duration
   """
 
-  def format(t) do
+  def format(%{distance: distance}) when distance > 0, do: nil
+  def format(%{moving_time: t}) do
     minutes = trunc(rem(t, 60 * 60) / 60)
     hours = trunc(t / (60 * 60))
 
