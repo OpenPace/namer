@@ -43,7 +43,8 @@ defmodule Namer.EmojiFormatter do
     "Yoga" => "🧘" # https://emojipedia.org/person-in-lotus-position/
   }
 
-  def format(type) do
+  def format(%{type: type}, [emoji: true]) do
     @emoji_map[type]
   end
+  def format(_, _), do: nil
 end
