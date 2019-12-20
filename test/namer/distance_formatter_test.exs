@@ -14,6 +14,14 @@ defmodule Namer.DistanceFormatterTest do
       assert format(%{type: "Swim", distance: 500}, imperial: false) == "500 m"
     end
 
+    test "with zero meter distance" do
+      assert format(%{distance: 0}, imperial: false) == nil
+    end
+
+    test "with a nil distance" do
+      assert format(%{distance: nil}, imperial: false) == nil
+    end
+
     test "with imperial: true returns miles" do
       assert format(%{distance: 10_000}, imperial: true) == "6.2 mi"
     end

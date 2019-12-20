@@ -11,9 +11,11 @@ defmodule Namer.NameGenerator do
   @branding_text "Renamed with openpace.co/namer"
 
   def generate_name(user, activity) do
+    imperial = user.user_prefs.imperial
+
     parts = [
       emoji(user, activity),
-      distance(user, activity),
+      DistanceFormatter.format(activity, imperial: imperial),
       duration(user, activity),
       relative_time(user, activity),
       ActivityTypeFormatter.format(activity.type)
@@ -42,11 +44,6 @@ defmodule Namer.NameGenerator do
     EmojiFormatter.format(activity.type)
   end
   defp emoji(_, _), do: nil
-
-  defp distance(_, %{distance: distance}) when distance == 0, do: nil
-  defp distance(%{user_prefs: %{imperial: imperial}}, activity) do
-    DistanceFormatter.format(activity.distance, imperial: imperial)
-  end
 
   defp duration(_, %{distance: distance} = activity) when distance == 0 do
     DurationFormatter.format(activity.moving_time)
