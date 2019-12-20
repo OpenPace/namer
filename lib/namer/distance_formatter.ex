@@ -9,14 +9,15 @@ defmodule Namer.DistanceFormatter do
   def format(%{type: "Swim", distance: distance}, opts) do
     to_yards_or_meters(distance, opts)
   end
+  def format(%{distance: distance}, _) when distance == 0 or is_nil(distance), do: nil
   def format(%{distance: distance}, opts) do
     to_miles_or_kilometers(distance, opts)
   end
 
-  def to_yards_or_meters(distance, [imperial: false]) do
+  defp to_yards_or_meters(distance, [imperial: false]) do
     "#{distance} m"
   end
-  def to_yards_or_meters(distance, [imperial: _]) do
+  defp to_yards_or_meters(distance, [imperial: _]) do
     "#{round(distance / @yard_in_meters)} yd"
   end
 
