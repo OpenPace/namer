@@ -22,6 +22,15 @@
       </div>
 
       <div class="form-group">
+        <%= label(p, :gender, "Emoji Gender", class: "form-control-label") %>
+        <%= select p, :gender, gender_opts(), class: "form-control form-control-alternative" %>
+
+        <small class="form-text text-muted">
+          Let us know what gender you would like to use for the emoji.
+        </small>
+      </div>
+
+      <div class="form-group">
         <div class="d-flex">
           <label class="custom-toggle">
             <%= checkbox(p, :branding) %>

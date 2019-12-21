@@ -49,6 +49,7 @@ defmodule Namer.MixProject do
       {:httpoison, "~> 1.5"},
       {:slack, "~> 0.20.0"},
       {:timex, "~> 3.5"},
+      {:ecto_enum, "~> 1.1"},
       {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test}
     ]

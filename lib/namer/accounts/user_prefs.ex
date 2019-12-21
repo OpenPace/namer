@@ -10,8 +10,9 @@ defmodule Namer.Accounts.UserPrefs do
 
   @required_fields ~w()a
   @optional_fields ~w(
-    emoji
     branding
+    emoji
+    gender
     imperial
   )a
 
@@ -19,6 +20,7 @@ defmodule Namer.Accounts.UserPrefs do
     field :emoji, :boolean
     field :branding, :boolean
     field :imperial, :boolean
+    field :gender, GenderEnum
 
     belongs_to :user, User
 
