@@ -36,6 +36,8 @@ config :strava,
   webhook_uri: "https://localhost:4000/webhook",
   webhook_challenge: System.get_env("STRAVA_WEBHOOK_TOKEN")
 
+config :slack, api_token: System.get_env("SLACK_TOKEN")
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
