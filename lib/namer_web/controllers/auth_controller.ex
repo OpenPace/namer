@@ -2,6 +2,7 @@ defmodule NamerWeb.AuthController do
   use NamerWeb, :controller
 
   alias Namer.Accounts
+  alias Namer.Reporter
 
   def request(conn, _) do
     redirect(conn, external: authorize_url!())
@@ -69,6 +70,8 @@ defmodule NamerWeb.AuthController do
 
     case Accounts.create_user(user_params) do
       {:ok, user} ->
+        Reporter.report_new_user(user)
+
         conn
         |> put_session(:user_id, user.id)
         |> redirect(to: Routes.profile_path(conn, :index))
