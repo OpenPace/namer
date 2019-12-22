@@ -48,6 +48,7 @@ defmodule Namer.MixProject do
       {:strava, "~> 1.0"},
       {:httpoison, "~> 1.5"},
       {:slack, "~> 0.20.0"},
+      {:timex, "~> 3.5"},
       {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test}
     ]
