@@ -9,9 +9,9 @@ defmodule Namer.NameGenerator do
   alias Namer.EmojiFormatter
   alias Namer.RelativeTimeFormatter
 
-  def generate_name(%{user_prefs: %{emoji: emoji, imperial: imperial}}, activity) do
+  def generate_name(%{user_prefs: %{emoji: emoji, gender: gender, imperial: imperial}}, activity) do
     parts = [
-      EmojiFormatter.format(activity, emoji: emoji),
+      EmojiFormatter.format(activity, emoji: emoji, gender: gender),
       DistanceFormatter.format(activity, imperial: imperial),
       DurationFormatter.format(activity),
       RelativeTimeFormatter.format(activity),

@@ -3,7 +3,7 @@ defmodule Namer.EmojiFormatter do
   This module returns an emoji for an activity type
   """
 
-  @emoji_map %{
+  @default_emoji %{
     "AlpineSki" => "⛷️", # https://emojipedia.org/skier/
     "BackcountrySki" => "⛷", # https://emojipedia.org/skier/
     "Canoeing" => "🛶", # https://emojipedia.org/canoe/
@@ -19,7 +19,7 @@ defmodule Namer.EmojiFormatter do
     "Kitesurf" => nil,
     "NordicSki" => nil,
     "Ride" => "🚴", # https://emojipedia.org/bicyclist/
-    "RockClimbing" => nil,
+    "RockClimbing" => "🧗", # https://emojipedia.org/person-climbing/
     "RollerSki" => nil,
     "Rowing" => "🚣", # https://emojipedia.org/rowboat/
     "Run" => "🏃", # https://emojipedia.org/runner/
@@ -43,8 +43,25 @@ defmodule Namer.EmojiFormatter do
     "Yoga" => "🧘" # https://emojipedia.org/person-in-lotus-position/
   }
 
-  def format(%{type: type}, [emoji: true]) do
-    @emoji_map[type]
+  @female_emoji_map %{
+    "EBikeRide" => "🚴‍♀", # https://emojipedia.org/woman-biking/
+    "Golf" => "🏌️‍♀️", # https://emojipedia.org/woman-golfing/
+    "Ride" => "🚴‍♀", # https://emojipedia.org/woman-biking/
+    "RockClimbing" => "🧗‍♀", # https://emojipedia.org/woman-climbing/
+    "Rowing" => "🚣‍♀", # https://emojipedia.org/woman-rowing-boat/
+    "Run" => "🏃‍♀", # https://emojipedia.org/woman-running/
+    "Surfing" => "🏄‍♀", # https://emojipedia.org/woman-surfing/
+    "Swim" => "🏊‍♀", # https://emojipedia.org/woman-swimming/
+    "VirtualRide" => "🚴‍♀", # https://emojipedia.org/woman-biking/
+    "Walk" => "🚶‍♀", # https://emojipedia.org/woman-walking/
+    "WeightTraining" => "🏋️‍♀️", # https://emojipedia.org/woman-weight-lifting/
+    "Yoga" => "🧘‍♀" # https://emojipedia.org/woman-in-lotus-position/
+  }
+
+  def format(%{type: type}, [emoji: true, gender: :female]) do
+    @female_emoji_map[type] || @default_emoji[type]
   end
+  def format(activity, [emoji: true, gender: _]), do: format(activity, emoji: true)
+  def format(%{type: type}, [emoji: true]), do: @default_emoji[type]
   def format(_, _), do: nil
 end

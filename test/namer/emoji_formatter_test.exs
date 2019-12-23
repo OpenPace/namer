@@ -5,11 +5,21 @@ defmodule Namer.EmojiFormatterTest do
 
   alias Namer.EmojiFormatter
 
-  test "format/1 with emoji: true" do
-    assert EmojiFormatter.format(%{type: "Run"}, emoji: true) == "🏃"
-  end
+  describe "format/1" do
+    test "with emoji: true and female" do
+      assert EmojiFormatter.format(%{type: "Run"}, emoji: true, gender: :female) == "🏃‍♀"
+    end
 
-  test "format/1 with emoji: false" do
-    assert EmojiFormatter.format(%{type: "Run"}, emoji: false) == nil
+    test "with emoji true, female, and no female emoji" do
+      assert EmojiFormatter.format(%{type: "IceSkate"}, emoji: true, gender: :female) == "⛸️"
+    end
+
+    test "with emoji: true" do
+      assert EmojiFormatter.format(%{type: "Run"}, emoji: true) == "🏃"
+    end
+
+    test "with emoji: false" do
+      assert EmojiFormatter.format(%{type: "Run"}, emoji: false) == nil
+    end
   end
 end

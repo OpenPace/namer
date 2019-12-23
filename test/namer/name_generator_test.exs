@@ -14,7 +14,7 @@ defmodule Namer.NameGeneratorTest do
   end
 
   defp build_user do
-    %{user_prefs: %{emoji: true, imperial: true}}
+    %{user_prefs: %{emoji: true, imperial: true, gender: :male}}
   end
 
   defp build_activity do
