@@ -12,6 +12,8 @@ defmodule Namer.RenamerJob do
   def perform(strava_uid, activity_id, retry) do
     Logger.info("Starting job for #{strava_uid} for activity #{activity_id}")
 
+    :timer.sleep(:timer.minutes(1))
+
     with {:ok, user} <- get_user(strava_uid),
          {:ok, _} <- ActivityRenamer.rename(user, activity_id) do
       :ok
