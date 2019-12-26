@@ -10,12 +10,13 @@ defmodule Namer.Accounts.User do
 
   @required_fields ~w(
     name
-    avatar
     strava_uid
     access_token
     refresh_token
   )a
-  @optional_fields ~w()a
+  @optional_fields ~w(
+    avatar
+  )a
 
   schema "users" do
     field :access_token, :string

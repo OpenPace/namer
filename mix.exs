@@ -27,7 +27,7 @@ defmodule Namer.MixProject do
   end
 
   # Specifies which paths to compile per environment.
-  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(:test), do: ["lib", "test/support", "test/factories"]
   defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
@@ -51,7 +51,9 @@ defmodule Namer.MixProject do
       {:timex, "~> 3.5"},
       {:ecto_enum, "~> 1.1"},
       {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.10", only: :test}
+      {:faker, "~> 0.9", only: [:dev, :test]},
+      {:excoveralls, "~> 0.10", only: :test},
+      {:ex_machina, "~> 2.3", only: :test}
     ]
   end
 
