@@ -7,4 +7,15 @@ defmodule NamerWeb.AuthControllerTest do
       assert redirected_to(conn) =~ ~r/https:\/\/www.strava.com/
     end
   end
+
+  describe "POST #callback" do
+  end
+
+  describe "DELETE #delete" do
+    test "signs out the user", %{conn: conn} do
+      conn = delete(conn, Routes.auth_path(conn, :delete))
+
+      assert get_session(conn, :user_id) == nil
+    end
+  end
 end
