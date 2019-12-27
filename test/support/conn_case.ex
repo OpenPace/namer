@@ -16,14 +16,17 @@ defmodule NamerWeb.ConnCase do
   use ExUnit.CaseTemplate
 
   alias Ecto.Adapters.SQL.Sandbox
-  alias Namer.Repo
+  alias Namer.{Factory, Repo}
   alias Phoenix.ConnTest
+  alias Plug.Conn
 
   using do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
       alias NamerWeb.Router.Helpers, as: Routes
+
+      import Namer.Factory
 
       # The default endpoint for testing
       @endpoint NamerWeb.Endpoint
@@ -37,6 +40,15 @@ defmodule NamerWeb.ConnCase do
       Sandbox.mode(Repo, {:shared, self()})
     end
 
-    {:ok, conn: ConnTest.build_conn()}
+    user = create_user(tags)
+
+    conn =
+      ConnTest.build_conn()
+      |> Conn.assign(:current_user, user)
+
+    {:ok, conn: conn, user: user}
   end
+
+  defp create_user(%{no_user: true}), do: nil
+  defp create_user(_), do: Factory.insert(:user)
 end

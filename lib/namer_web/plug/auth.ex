@@ -18,9 +18,10 @@ defmodule NamerWeb.Plug.Auth do
   def init(_), do: nil
 
   def call(conn, _) do
-    case get_session(conn, :user_id) do
-      nil -> redirect_to_home(conn)
-      user_id -> set_user(conn, user_id)
+    cond do
+      user = conn.assigns[:current_user] -> assign(conn, :current_user, user)
+      user_id = get_session(conn, :user_id) -> set_user(conn, user_id)
+      true -> redirect_to_home(conn)
     end
   end
 
