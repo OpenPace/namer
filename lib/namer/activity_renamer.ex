@@ -20,6 +20,8 @@ defmodule Namer.ActivityRenamer do
     end
   end
 
+  def rename(_, %DetailedActivity{manual: true} = activity), do: activity
+
   def rename(user, activity) do
     name = NameGenerator.generate_name(user, activity)
     description = DescriptionGenerator.generate_description(user, activity)
