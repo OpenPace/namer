@@ -15,15 +15,18 @@ defmodule Namer.Accounts.User do
     refresh_token
   )a
   @optional_fields ~w(
+    email
     avatar
   )a
 
   schema "users" do
     field :access_token, :string
-    field :avatar, :string
     field :name, :string
     field :refresh_token, :string
     field :strava_uid, :string
+
+    field :avatar, :string
+    field :email, :string
 
     has_one :user_prefs, UserPrefs
 
@@ -34,6 +37,7 @@ defmodule Namer.Accounts.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, @required_fields ++ @optional_fields)
+    |> validate_format(:email, ~r/@/)
     |> validate_required(@required_fields)
   end
 end
