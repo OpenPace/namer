@@ -1,5 +1,24 @@
 <%= form_for @changeset, Routes.profile_path(@conn, :update), fn f -> %>
   <h6 class="heading-small text-muted mb-4">
+    Account
+  </h6>
+
+  <div class="pl-lg-4">
+    <div class="form-group">
+      <%= label(f, :name, class: "form-control-label") %>
+      <%= text_input(f, :name, class: "form-control") %>
+    </div>
+
+    <div class="form-group">
+      <%= label(f, :email, class: "form-control-label") %>
+      <%= text_input(f, :email, class: "form-control") %>
+      <small class="form-text text-muted">
+        Add your email if you would like to get updates from us.
+      </small>
+    </div>
+  </div>
+
+  <h6 class="heading-small text-muted mb-4">
     Preferences
   </h6>
 
