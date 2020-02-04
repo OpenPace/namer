@@ -2,9 +2,9 @@
 
 # Emojify Your Strava Activity
 
-[![Build Status](https://travis-ci.org/edance/namer.svg?branch=master)](https://travis-ci.org/edance/namer)
-[![Coverage Status](https://coveralls.io/repos/github/edance/namer/badge.svg?branch=master)](https://coveralls.io/github/edance/namer?branch=master)
-[![license](https://img.shields.io/github/license/edance/openpace.svg)](https://github.com/edance/namer/blob/master/LICENSE.md)
+[![Build Status](https://travis-ci.org/openpace/namer.svg?branch=master)](https://travis-ci.org/openpace/namer)
+[![Coverage Status](https://coveralls.io/repos/github/openpace/namer/badge.svg?branch=master)](https://coveralls.io/github/openpace/namer?branch=master)
+[![license](https://img.shields.io/github/license/openpace/namer.svg)](https://github.com/openpace/namer/blob/master/LICENSE.md)
 
 ## What is this?
 
@@ -21,7 +21,7 @@ This will automatically be converted to `🧘 1hr Morning Yoga`.
 ## Can I add an emoji?
 
 Yes please!
-You can see a list of all the emojis used [here](https://github.com/edance/namer/blob/master/lib/namer/emoji_formatter.ex#L6-L44).
+You can see a list of all the emojis used [here](https://github.com/openpace/namer/blob/master/lib/namer/emoji_formatter.ex#L6-L44).
 If you would like to add another one, please open a pull request.
 
 ### Contributing
