@@ -101,6 +101,22 @@ defmodule Namer.Accounts do
   end
 
   @doc """
+  Deletes a User.
+
+  ## Examples
+
+  iex> delete_user(user)
+  {:ok, %User{}}
+
+  iex> delete_user(user)
+  {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_user(%User{} = user) do
+    Repo.delete(user)
+  end
+
+  @doc """
   Returns an `%Ecto.Changeset{}` for tracking user changes.
 
   ## Examples
