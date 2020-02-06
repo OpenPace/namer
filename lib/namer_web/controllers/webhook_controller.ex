@@ -5,6 +5,7 @@ defmodule NamerWeb.WebhookController do
   Controller to handle the webhooks from Strava
   """
 
+  alias Namer.Accounts
   alias Namer.Logger
   alias Namer.RenamerJob
 
@@ -17,6 +18,13 @@ defmodule NamerWeb.WebhookController do
     Task.start(fn -> process_event(params) end)
     render(conn, "success.json")
   end
+
+  def webhook(conn, %{"updates" => %{"authorized" => "false"}, "owner_id" => id}) do
+    user = Accounts.get_user_by_uid(id)
+    Accounts.delete_user(user)
+    render(conn, "success.json")
+  end
+
   def webhook(conn, _), do: render(conn, "success.json")
 
   def challenge(conn, %{"hub.challenge" => challenge}) do
