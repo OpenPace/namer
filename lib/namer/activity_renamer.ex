@@ -22,7 +22,15 @@ defmodule Namer.ActivityRenamer do
 
   def rename(_, %DetailedActivity{manual: true} = activity), do: activity
 
-  def rename(user, activity) do
+  def rename(user, %DetailedActivity{} = activity) do
+    if activity.device_name =~ "Strava" do # Skip all Strava Apps
+      activity
+    else
+      rename_activity(user, activity)
+    end
+  end
+
+  defp rename_activity(user, activity) do
     name = NameGenerator.generate_name(user, activity)
     description = DescriptionGenerator.generate_description(user, activity)
     attrs = %{name: name, description: description}
