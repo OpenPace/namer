@@ -46,7 +46,7 @@ defmodule NamerWeb.AuthController do
       name: "#{athlete.firstname} #{athlete.lastname}",
       strava_uid: "#{athlete.id}",
       user_prefs: %{
-        imperial: athlete.country == "United States"
+        imperial: athlete.measurement_preference == "feet"
       }
     }
     attrs |> Map.merge(token_attrs(client))
