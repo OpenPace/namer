@@ -6,7 +6,7 @@ defmodule Namer.ActivityRenamer do
 
   alias Namer.Accounts
   alias Namer.DescriptionGenerator
-  alias Namer.{NameChecker, NameGenerator}
+  alias Namer.NameGenerator
   alias Strava.{Activities, Client, DetailedActivity}
 
   import Strava.RequestBuilder
@@ -20,16 +20,17 @@ defmodule Namer.ActivityRenamer do
     end
   end
 
-  def rename(user, %DetailedActivity{name: name} = activity) do
-    if NameChecker.strava_default?(activity) do
-      rename_activity(user, activity)
+  def rename(_, %DetailedActivity{manual: true} = activity), do: activity
+
+  def rename(user, %DetailedActivity{} = activity) do
+    if activity.device_name =~ "Strava" do # Skip all Strava Apps
+      activity
     else
-      Logger.info("Skipping #{activity.id}: #{name}")
-      {:error, activity}
+      rename_activity(user, activity)
     end
   end
 
-  defp rename_activity(user, %DetailedActivity{} = activity) do
+  defp rename_activity(user, activity) do
     name = NameGenerator.generate_name(user, activity)
     description = DescriptionGenerator.generate_description(user, activity)
     attrs = %{name: name, description: description}
