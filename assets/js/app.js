@@ -25,3 +25,5 @@ WebFont.load({
 import Iconify from '@iconify/iconify';
 Iconify.setConfig('localStorage', true);
 Iconify.scanDOM();
+
+import './components/base';
