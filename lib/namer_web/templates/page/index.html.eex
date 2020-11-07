@@ -40,7 +40,7 @@
 </nav>
 
 <div id="top" class="position-relative">
-  <section class="section section-lg position-relative overflow-hidden">
+  <section class="section section-lg position-relative overflow-hidden mb-8">
     <div class="container text-container py-4 py-md-6">
       <div class="row">
         <div class="col-12 col-md-6 mb-6">
@@ -70,3 +70,27 @@
     </div>
   </section>
 </div>
+
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row align-items-center justify-content-xl-between">
+      <div class="col-xl-6">
+        <div class="copyright text-center text-xl-left text-muted">
+          © <%= copyright_year() %> <%= company_name() %>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+          <li class="nav-item">
+            <%= link("Terms and Conditions", to: "/terms", class: "nav-link", target: "_blank") %>
+          </li>
+          <li class="nav-item">
+            <%= link("Privacy Policy", to: "/privacy", class: "nav-link", target: "_blank") %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
