@@ -10,6 +10,7 @@ defmodule Namer.UserFactory do
         %User{
           name: Name.name(),
           avatar: Avatar.image_url(),
+          premium: true,
           strava_uid: sequence(:external_id, &("#{&1}")),
           access_token: UUID.v4(),
           refresh_token: UUID.v4(),
