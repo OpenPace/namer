@@ -17,6 +17,7 @@ defmodule Namer.Accounts.User do
   @optional_fields ~w(
     email
     avatar
+    premium
   )a
 
   schema "users" do
@@ -27,6 +28,7 @@ defmodule Namer.Accounts.User do
 
     field :avatar, :string
     field :email, :string
+    field :premium, :boolean # strava premium
 
     has_one :user_prefs, UserPrefs
 

@@ -44,6 +44,7 @@ defmodule NamerWeb.AuthController do
     attrs = %{
       avatar: athlete.profile,
       name: "#{athlete.firstname} #{athlete.lastname}",
+      premium: athlete.premium,
       strava_uid: "#{athlete.id}",
       user_prefs: %{
         imperial: athlete.country == "United States"

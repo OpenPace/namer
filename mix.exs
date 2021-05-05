@@ -47,6 +47,7 @@ defmodule Namer.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:strava, "~> 1.0"},
       {:httpoison, "~> 1.5"},
+      {:hackney, "~> 1.16.0"},
       {:slack, "~> 0.20.0"},
       {:timex, "~> 3.5"},
       {:ecto_enum, "~> 1.1"},
