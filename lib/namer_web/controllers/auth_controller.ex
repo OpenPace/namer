@@ -47,11 +47,16 @@ defmodule NamerWeb.AuthController do
       premium: athlete.premium,
       strava_uid: "#{athlete.id}",
       user_prefs: %{
-        imperial: athlete.country == "United States"
+        gender: parse_gender(athlete.sex),
+        imperial: athlete.measurement_preference == "feet"
       }
     }
     attrs |> Map.merge(token_attrs(client))
   end
+
+  defp parse_gender("F"), do: :female
+  defp parse_gender("M"), do: :male
+  defp parse_gender(_), do: :prefer_not_to_say
 
   defp sign_in_and_redirect(conn, client, user) do
     case Accounts.update_user(user, token_attrs(client)) do
